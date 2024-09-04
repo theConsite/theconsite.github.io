@@ -1,0 +1,52 @@
+@keyframes myAnim {
+	0%,
+	100% {
+		transform: rotate3d(0);
+		transform-origin: 50% 50%;
+	}
+
+	25% {
+		transform: rotate3d(0,10,0, 15deg);
+	}
+
+	75% {
+		transform: rotate3d(0,-10,0, 15deg);
+	}
+
+
+}
+.content-container{
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.content>img{
+    width: 30vmin;
+    filter: drop-shadow(10px 10px  #222);
+    animation: myAnim 5s linear 0s infinite normal forwards;
+    margin-bottom: 20px;
+}
+
+.content>p{
+    margin: 5px 0;
+}
+
+.signature{
+    align-self: flex-end;
+    font-weight: bold;
+}
