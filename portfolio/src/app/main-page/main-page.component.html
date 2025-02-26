@@ -1,8 +1,44 @@
-<div class="content-container">
-    <div class="content">
-        <img src="assets/img/portrait.png" alt="My portrait">
-        <p>Welcome on my page! Please come back later, as it's currently under construction.</p>
-        <p>Cześć! Strona jest w trakcie tworzenia, stopniowo będą pojawiać się tu nowe treści.</p>
-        <p class="signature">~Adrian</p>
+<div class="main-page-content-wrapper">
+    <div class="main-page-row">
+        <content-card class="flex-2">
+            <div id="about-card">
+                <img src="assets/img/portrait.png" class="portrait-img">
+                <div>
+                    <p class="name">Adrian Jobda</p>
+                    <div id="description">
+                        I am a graduate of the Polish-Japanese Academy of Information Technology,
+                        majoring in computer science. I started programming in 2018, got my first
+                        full-time job in IT in 2020, and advanced to Front-End Angular developer in
+                        March 2021. I am an ambitious, open-minded, goal-oriented person with a
+                        drive for continuous development.
+                    </div>
+                </div>
+            </div>
+        </content-card>
+        <content-card class="flex-1" [title]="'Links'">
+            <div class="link-card-container">
+                @for (link of links; track link) {
+                    <link-card [item]="link"></link-card>
+                }
+            </div>
+        </content-card>
     </div>
+    <div class="main-page-row">
+        <content-card class="flex-1" [title]="'Technologies and skills'">
+            <div class="vertical-wrapped-list">
+                @for (tech of technologies; track tech) {
+                    <techstack-icon [title]="tech"></techstack-icon>
+                }
+            </div>
+        </content-card>
+    </div>
+    <!-- <div class="main-page-row">
+        <content-card class="flex-1" [title]="'Work experience'">
+            
+        </content-card>
+        <content-card class="flex-1" [title]="'Education'">
+            
+        </content-card>
+    </div> -->
+
 </div>

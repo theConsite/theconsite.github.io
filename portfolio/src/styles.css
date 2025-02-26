@@ -1,10 +1,33 @@
-body{
-    /* Background pattern based on this publicly avaliable code: https://projects.verou.me/css3patterns/#waves */
-    background:
-    radial-gradient(circle at 100% 50%, transparent 20%, rgba(255,255,255,.3) 21%, rgba(255,255,255,.3) 34%, transparent 35%, transparent),
-    radial-gradient(circle at 0% 50%, transparent 20%, rgba(255, 255, 255, 0.3) 21%, rgba(255,255,255,.3) 34%, transparent 35%, transparent) 0 -50px;
-    background-color: rgb(212, 212, 212);
-    background-size:75px 100px;
+:root {
+    --element-bg-color: rgba(255, 255, 255, .15);
+    --card-radius: 10px;
+    --primary-color: #377AEC;
+    --secondary-color: #FFFFFF;
+    --tetriary-color: #A5A692;
+    --constrasting-bg: rgba(0,0,0,.1);
+}
+
+body {
+    background: linear-gradient(45deg, rgb(6, 22, 65) 0%, rgba(2,8,23,1) 100%);
+    min-height: 100vh;
     font-family: "Open Sans", sans-serif;
     margin: 0;
+}
+
+.flex-1, .flex-2{
+    min-width: 450px;
+}
+
+.flex-1{
+    flex: 1;
+}
+.flex-2{
+    flex: 2;
+}
+
+.vertical-wrapped-list{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+    gap: 10px;
 }

@@ -1,0 +1,18 @@
+.card-container{
+    border-radius: 10px;
+    background-color: var(--element-bg-color);
+    padding: 1rem;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.title{
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card-content{
+    margin: .5rem;
+}

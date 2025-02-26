@@ -1,0 +1,16 @@
+.icon-container{
+    width: 75px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--constrasting-bg);
+    border-radius: var(--card-radius);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+
+.icon-container>img{
+    width: 35px;
+}

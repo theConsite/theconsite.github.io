@@ -1,0 +1,17 @@
+.link-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+    flex: 1;
+    background-color: var(--constrasting-bg);
+    border-radius: var(--card-radius);
+    height: 90px;
+    transition: .1slinear;
+}
+
+.link-card-container:hover {
+    background-color: rgba(0, 0, 0, .2);
+}
