@@ -84,7 +84,7 @@ const assets = {
         quickLinks: [
           {
             name: "GitHub",
-            url: "https://github.com/adrianjobda",
+            url: "https://github.com/theConsite",
             icon: "github"
           },
           {
@@ -177,7 +177,7 @@ const assets = {
         quickLinks: [
           {
             name: "GitHub",
-            url: "https://github.com/adrianjobda",
+            url: "https://github.com/theConsite",
             icon: "github"
           },
           {
