@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Globe, User, Wrench, BookOpenText, Briefcase, Handshake, Moon, Sun, Monitor } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Globe, User, Wrench, BookOpenText, Briefcase, Handshake, Moon, Sun, Monitor, ChevronDown } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 type Language = "en" | "pl";
 
@@ -154,7 +154,11 @@ const assets = {
 function HomeContent() {
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [language, setLanguage] = useState<Language>("en");
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const { theme, toggleTheme } = useTheme();
+  const languageDropdownRef = useRef<HTMLDivElement>(null);
+  const languageButtonRef = useRef<HTMLButtonElement>(null);
 
   // Handle language initialization after mount
   useEffect(() => {
@@ -170,6 +174,26 @@ function HomeContent() {
   useEffect(() => {
     localStorage.setItem("language", language);
   }, [language]);
+
+  // Handle click outside to close language dropdown
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      const isClickInsideDropdown = languageDropdownRef.current && languageDropdownRef.current.contains(target);
+      const isClickOnButton = languageButtonRef.current && languageButtonRef.current.contains(target);
+      
+      if (!isClickInsideDropdown && !isClickOnButton) {
+        setIsLanguageDropdownOpen(false);
+      }
+    }
+
+    if (isLanguageDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isLanguageDropdownOpen]);
 
   useEffect(() => {
     const observerOptions = {
@@ -204,9 +228,84 @@ function HomeContent() {
     }
   };
 
+  const handleLanguageSelect = (selectedLanguage: Language) => {
+    setLanguage(selectedLanguage);
+    setIsLanguageDropdownOpen(false);
+  };
+
+  const toggleLanguageDropdown = () => {
+    if (!isLanguageDropdownOpen && languageButtonRef.current) {
+      const rect = languageButtonRef.current.getBoundingClientRect();
+      const dropdownHeight = 80; // Approximate height for 2 options
+      setDropdownPosition({
+        top: rect.top - dropdownHeight - 16, // Position above button with margin
+        left: rect.left-72
+      });
+    }
+    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
+  };
+
+  const languageOptions = [
+    { code: 'en' as Language, label: 'English', flag: 'en' },
+    { code: 'pl' as Language, label: 'Polski', flag: '🇵🇱' }
+  ];
+
   const t = assets[language]
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background">
+      <nav className=" fixed bottom-2 right-2 z-50 w-fit">
+          <div className="glass flex items-center justify-center gap-2 p-3 md:gap-4">
+            <button 
+              onClick={toggleTheme}
+              className="smlbtn-hover flex items-center gap-2 px-3 py-2"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <Sun className="w-4 h-4" />
+              ) : theme === 'dark' ? (
+                <Moon className="w-4 h-4" />
+              ) : (
+                <Monitor className="w-4 h-4" />
+              )}
+            </button>
+            <button 
+              ref={languageButtonRef}
+              onClick={toggleLanguageDropdown}
+              className={`smlbtn-hover flex items-center gap-2 px-3 py-2 ${isLanguageDropdownOpen ? 'active' : ''}`}
+              aria-label="Change language"
+            >
+              <Globe className="w-4 h-4" />
+              <ChevronDown className={`w-3 h-3 transition-transform ${isLanguageDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
+    </nav>
+    
+    {/* Language Dropdown */}
+    {isLanguageDropdownOpen && (
+      <div 
+        ref={languageDropdownRef}
+        className="w-36 glass border border-border/20 rounded-lg overflow-hidden shadow-lg z-50"
+        style={{
+          position: 'fixed',
+          top: `${dropdownPosition.top}px`,
+          left: `${dropdownPosition.left}px`
+        }}
+      >
+        {languageOptions.map((option) => (
+          <button
+            key={option.code}
+            onClick={() => handleLanguageSelect(option.code)}
+            className={`w-full px-3 py-2 text-left hover:bg-foreground/10 transition-colors flex items-center gap-2 ${
+              language === option.code ? 'bg-foreground/5' : ''
+            }`}
+          >
+            <span className="text-sm">{option.flag}</span>
+            <span className="text-sm">{option.label}</span>
+          </button>
+        ))}
+      </div>
+    )}
+    
     {/* Background Elements */}
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-3xl"></div>
@@ -245,88 +344,8 @@ function HomeContent() {
       </div>
     </section>
 
-    <nav className="sticky top-0 z-50 w-full px-6 py-3">
-      <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row justify-between gap-3">
-        {/* Main Navigation */}
-        <div className="glass p-2 md:p-3 flex-grow">
-          <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 md:gap-4">
-            <a 
-              href="#about" 
-              onClick={(e) => handleNavClick(e, 'about')}
-              className={`glass-hover flex items-center gap-2 px-3 py-2 ${activeSection === "about" ? "active" : ""}`}
-            >
-              <User className="w-4 h-4" />
-              <span className="hidden sm:inline">{t.common.about}</span>
-            </a>
-            <a 
-              href="#skills" 
-              onClick={(e) => handleNavClick(e, 'skills')}
-              className={`glass-hover flex items-center gap-2 px-3 py-2 ${activeSection === "skills" ? "active" : ""}`}
-            >
-              <Wrench className="w-4 h-4" />
-              <span className="hidden sm:inline">{t.common.skills}</span>
-            </a>
-            <a 
-              href="#experience" 
-              onClick={(e) => handleNavClick(e, 'experience')}
-              className={`glass-hover flex items-center gap-2 px-3 py-2 ${activeSection === "experience" ? "active" : ""}`}
-            >
-              <Briefcase className="w-4 h-4" />
-              <span className="hidden sm:inline">{t.common.experience}</span>
-            </a>
-            <a 
-              href="#education" 
-              onClick={(e) => handleNavClick(e, 'education')}
-              className={`glass-hover flex items-center gap-2 px-3 py-2 ${activeSection === "education" ? "active" : ""}`}
-            >
-              <BookOpenText className="w-4 h-4" />
-              <span className="hidden sm:inline">{t.common.education}</span>
-            </a>
-            <a 
-              href="#contact" 
-              onClick={(e) => handleNavClick(e, 'contact')}
-              className={`glass-hover flex items-center gap-2 px-3 py-2 ${activeSection === "contact" ? "active" : ""}`}
-            >
-              <Handshake className="w-4 h-4" />
-              <span className="hidden sm:inline">{t.common.contact}</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Controls */}
-        <div className="glass p-2 md:p-3">
-          <div className="flex items-center justify-center gap-2 md:gap-4">
-            <button 
-              onClick={toggleTheme}
-              className="glass-hover flex items-center gap-2 px-3 py-2"
-              aria-label="Toggle theme"
-            >
-              {theme === 'light' ? (
-                <Sun className="w-4 h-4" />
-              ) : theme === 'dark' ? (
-                <Moon className="w-4 h-4" />
-              ) : (
-                <Monitor className="w-4 h-4" />
-              )}
-              <span className="hidden sm:inline">
-                {theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'System'}
-              </span>
-            </button>
-            <button 
-              onClick={() => setLanguage(prev => prev === "en" ? "pl" : "en")}
-              className="glass-hover flex items-center gap-2 px-3 py-2"
-              aria-label="Change language"
-            >
-              <Globe className="w-4 h-4" />
-              <span className="hidden sm:inline">{language === "en" ? "PL" : "EN"}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-
     {/* About Section */}
-    <section id="about" className="w-full px-6 py-16">
+    <section id="about" className="min-h-screen w-full px-6 py-16 flex items-center">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           {t.sections.about.title}
@@ -340,7 +359,7 @@ function HomeContent() {
     </section>
 
     {/* Skills Section */}
-    <section id="skills" className="w-full px-6 py-16 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5">
+    <section id="skills" className="min-h-screen w-full px-6 py-16 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 flex items-center">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           {t.sections.skills.title}
@@ -378,7 +397,7 @@ function HomeContent() {
     </section>
 
     {/* Experience Section */}
-    <section id="experience" className="w-full px-6 py-16">
+    <section id="experience" className="min-h-screen w-full px-6 py-16 flex items-center">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           {t.sections.experience.title}
@@ -404,7 +423,7 @@ function HomeContent() {
     </section>
 
     {/* Education Section */}
-    <section id="education" className="w-full px-6 py-16 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-blue-500/5">
+    <section id="education" className="min-h-screen w-full px-6 py-16 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-blue-500/5 flex items-center">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           {t.sections.education.title}
@@ -431,7 +450,7 @@ function HomeContent() {
     </section>
 
     {/* Contact Section */}
-    <section id="contact" className="w-full px-6 py-16">
+    <section id="contact" className="min-h-screen w-full px-6 py-16 flex items-center">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           {t.sections.contact.title}

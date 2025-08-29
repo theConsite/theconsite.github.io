@@ -15,6 +15,7 @@
     --glass-blur: 12px;
     --glass-hover-blur: 16px;
     --transition-speed: 0.3s;
+    --highlight-color: #35a0f8;
   }
 }
 
@@ -28,6 +29,7 @@
     --glass-blur: 16px;
     --glass-hover-blur: 20px;
     --transition-speed: 0.3s;
+    --highlight-color: #058eff;
   }
 }
 
@@ -40,6 +42,7 @@
   --glass-blur: 12px;
   --glass-hover-blur: 16px;
   --transition-speed: 0.3s;
+  --highlight-color: #058eff;
 }
 
 .dark {
@@ -51,6 +54,7 @@
   --glass-blur: 16px;
   --glass-hover-blur: 20px;
   --transition-speed: 0.3s;
+  --highlight-color: #058eff;
 }
 
 @theme inline {
@@ -136,6 +140,16 @@ body {
   border-color: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(var(--glass-hover-blur));
   -webkit-backdrop-filter: blur(var(--glass-hover-blur));
+}
+
+.smlbtn-hover{
+  transition: all 0.1s ease;
+  border-radius: 0.5rem;
+}
+
+.smlbtn-hover:hover, .smlbtn-hover.active, .smlbtn-hover.active:hover {
+  background-color: var(--highlight-color);
+  cursor: pointer;
 }
 
 /* Gradient Backgrounds */
