@@ -7,7 +7,6 @@ type Theme = 'light' | 'dark' | 'system';
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
-  effectiveTheme: 'light' | 'dark';
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -72,10 +71,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const effectiveTheme = mounted ? getEffectiveTheme(theme) : 'light';
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, effectiveTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

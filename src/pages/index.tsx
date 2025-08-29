@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Globe, User, Wrench, BookOpenText, Briefcase, Handshake, Moon, Sun, Monitor, ChevronDown } from "lucide-react";
+import { Globe, Moon, Sun, Monitor, ChevronDown, Github, Linkedin, ExternalLink } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 type Language = "en" | "pl";
 
@@ -8,27 +8,22 @@ const assets = {
     common: {
       email: "kontakt@adrianjobda.pl",
       phone: "+48 451 173 472",
-      address: "Warsaw, Poland",
       about: "About Me",
       skills: "Skills",
       experience: "Experience",
       education: "Education",
-      contact: "Contact",
-      theme: "Theme",
-      language: "Language"
+      contact: "Contact"
     },
     sections: {
       hero: {
         title: "Adrian Jobda",
         subtitle: "Software Developer",
         description: "Passionate about creating innovative solutions and building exceptional user experiences with modern technologies.",
-        learnMore: "Learn More",
-        downloadResume: "Download Resume"
+        learnMore: "Learn More"
       },
       about: {
         title: "About Me",
-        description: "I'm a passionate software developer with over 5 years of experience building web applications and mobile solutions. I love turning complex problems into simple, beautiful designs and writing clean, efficient code.",
-        quickLinks: "Quick Links"
+        description: "I'm a passionate developer with over 4 years of commercial experience and 7 years of experience overall. I'm always pursuing new challenges and opportunities to grow as a developer. My projects are developed with a focus on clean, readable code and customer satisfaction. During my short career I've worked on projects for multiple companies, both local and international. My main area of expertise is web and multi-platform development, but I've also worked on full-stack projects. I'm also personally interested Computer Science as an entire field, mainly focusing on Cybersecurity and new technologies, such as AI."
       },
       skills: {
         title: "Skills"
@@ -37,18 +32,25 @@ const assets = {
         title: "Experience",
         work: [
           {
-            role: "Senior Software Developer",
-            company: "Tech Solutions Inc.",
-            period: "2021 - Present",
-            summary: "Leading development of enterprise web applications using React and Node.js",
-            icon: "company-logo-1"
+            role: "Solutions Engineer",
+            company: "Gainsight",
+            period: "Apr 2025 - Present",
+            summary: "Implementing and maintaining customer-requested customizations for Gainsight's products. I've already worked on projects for companies such as Google, Adobe, LinkedIn, Jamf, and many more.",
+            icon: "/experience/gainsight.jpg"
           },
           {
-            role: "Full Stack Developer",
-            company: "Digital Innovations",
-            period: "2019 - 2021",
-            summary: "Developed and maintained multiple client projects using modern web technologies",
-            icon: "company-logo-2"
+            role: "Angular Developer",
+            company: "BMCG Software",
+            period: "Mar 2021 - Mar 2025",
+            summary: "Developing and maintaining multiple projects using Angular and related technologies, such as Ionic and Typescript. Successfully delivered multiple projects, including two mobile apps.",
+            icon: "/experience/bmcg.jpg"
+          },
+          {
+            role: "Customer Support Specialist",
+            company: "BMCG Software",
+            period: "Nov 2020 - Mar 2021",
+            summary: "Providing technical support and expertise to enterprise customers. My tasks included troubleshooting issues, resolving customer inquiries, and setting up our services in their environments.",
+            icon: "/experience/bmcg.jpg"
           }
         ]
       },
@@ -58,10 +60,18 @@ const assets = {
           {
             name: "Warsaw University of Technology",
             location: "Warsaw, Poland",
-            degree: "Master's in Computer Science",
-            summary: "Specialized in Software Engineering and Artificial Intelligence",
-            period: "2017 - 2019",
-            icon: "university-logo"
+            degree: "Master of Science in Computer Science",
+            summary: "Ongoing master's degree in Computer Science. I'm currently starting my last year of studies and preparing for my thesis.",
+            period: "2024 - 2026",
+            icon: "/education/wut.png"
+          },
+          {
+            name: "Polish-Japanese Academy of Information Technology",
+            location: "Warsaw, Poland",
+            degree: "Bachelor of engineering in Computer Science",
+            summary: "Obtained a Bachelor's degree in Computer Science with a specialization in Cybersecurity and advanced Networking with one of the highest grades. I also completed multiple optional courses related to Artificial Intelligence, advanced Software Engineering, and Bioinformatics.",
+            period: "2020 - 2024",
+            icon: "/education/pjatk.png"
           }
         ]
       },
@@ -70,38 +80,43 @@ const assets = {
         description: "I'm always looking for new opportunities and collaborations. Feel free to reach out to me via email or connect with me on social media.",
         email: "kontakt@adrianjobda.pl",
         phone: "+48 451 173 472",
-        address: "Warsaw, Poland"
+        contactWithMe: "My profiles",
+        quickLinks: [
+          {
+            name: "GitHub",
+            url: "https://github.com/adrianjobda",
+            icon: "github"
+          },
+          {
+            name: "LinkedIn",
+            url: "https://linkedin.com/in/adrianjobda",
+            icon: "linkedin"
+          }
+        ]
       }
     },
-    footer: {
-      quickLinks: "Copyright © 2025 Adrian Jobda. All rights reserved."
-    }
+    footer: `Copyright © 2025 - ${new Date().getFullYear()} Adrian Jobda. All rights reserved.`
   },
   pl: {
     common: {
       email: "kontakt@adrianjobda.pl",
       phone: "+48 451 173 472",
-      address: "Warszawa, Polska",
       about: "O mnie",
       skills: "Umiejętności",
       experience: "Doświadczenie",
       education: "Edukacja",
-      contact: "Kontakt",
-      theme: "Motyw",
-      language: "Język"
+      contact: "Kontakt"
     },
     sections: {
       hero: {
         title: "Adrian Jobda",
         subtitle: "Software Developer",
-        description: "Pasjonat tworzenia innowacyjnych rozwiązań i budowania wyjątkowych doświadczeń użytkownika z wykorzystaniem nowoczesnych technologii.",
-        learnMore: "Dowiedz się więcej",
-        downloadResume: "Pobierz CV"
+        description: "Pasjonat tworzenia innowacyjnych rozwiązań i budowania wyjątkowych doświadczeń z wykorzystaniem nowoczesnych technologii.",
+        learnMore: "Dowiedz się więcej"
       },
       about: {
         title: "O mnie",
-        description: "Jestem pasjonatem programowania, z ponad 5-letnim doświadczeniem w budowaniu aplikacji webowych i rozwiązań mobilnych. Lubię przekształcać złożone problemy w proste, piękne projekty i pisać czysty, wydajny kod.",
-        quickLinks: "Szybkie linki"
+        description: "Jestem pasjonatem programowania z ponad 5-letnim stażem komercyjnym i 7-letnim doświadczeniem ogółem. Zawsze poszukuję nowych wyzwań i możliwości rozwoju jako programista. Tworzę moje projekty z naciskiem na czysty, czytelny kod i zadowolenie klienta. Podczas mojej kariery realizowałem już projekty dla wielu firm, zarówno lokalnych, jak i międzynarodowych. Moim głównym obszarem specjalizacji jest programowanie webowe i wieloplatformowe, ale pracowałem również przy projektach full-stack. Poza tym interesuję się informatyką w ogóle, koncentrując się głównie na cyberbezpieczeństwie i nowych technologiach, takich jak AI."
       },
       skills: {
         title: "Umiejętności"
@@ -110,18 +125,25 @@ const assets = {
         title: "Doświadczenie",
         work: [
           {
-            role: "Starszy Programista",
-            company: "Tech Solutions Inc.",
-            period: "2021 - Obecnie",
-            summary: "Prowadzenie rozwoju aplikacji webowych dla przedsiębiorstw z wykorzystaniem React i Node.js",
-            icon: "company-logo-1"
+            role: "Solutions Engineer",
+            company: "Gainsight",
+            period: "Kwi 2025 - Obecnie",
+            summary: "Modyfikacja produktów Gainsight zgodnie z potrzebami klientów oraz późniejsze utrzymanie. Pracowałem już przy projektach dla firm takich jak Google, Adobe, LinkedIn, Jamf i wielu innych.",
+            icon: "/experience/gainsight.jpg"
           },
           {
-            role: "Full Stack Developer",
-            company: "Digital Innovations",
-            period: "2019 - 2021",
-            summary: "Rozwój i utrzymanie wielu projektów klienckich z wykorzystaniem nowoczesnych technologii webowych",
-            icon: "company-logo-2"
+            role: "Angular Developer",
+            company: "BMCG Software",
+            period: "Mar 2021 - Mar 2025",
+            summary: "Rozwijanie i utrzymywanie wielu projektów przy użyciu Angular i powiązanych technologii, takich jak Ionic i TypeScript. Miałem okazję pracować nad wieloma projektami, a nawet wydać dwie aplikacje mobilne.",
+            icon: "/experience/bmcg.jpg"
+          },
+          {
+            role: "Customer Support Specialist",
+            company: "BMCG Software",
+            period: "Lis 2020 - Mar 2021",
+            summary: "Zapewnianie wsparcia technicznego i ekspertyzy dla klientów korporacyjnych. Moje zadania obejmowały rozwiązywanie problemów, rozpatrywanie wymagań klientów oraz konfigurowanie naszych usług w ich środowiskach.",
+            icon: "/experience/bmcg.jpg"
           }
         ]
       },
@@ -132,23 +154,41 @@ const assets = {
             name: "Politechnika Warszawska",
             location: "Warszawa, Polska",
             degree: "Magister Informatyki",
-            summary: "Specjalizacja w Inżynierii Oprogramowania i Sztucznej Inteligencji",
-            period: "2017 - 2019",
-            icon: "university-logo"
+            summary: "Trwające studia magisterskie z informatyki. Obecnie rozpoczynam ostatni rok studiów i przygotowuję się do pracy magisterskiej.",
+            period: "2024 - 2026",
+            icon: "/education/wut.png"
+          },
+          {
+            name: "Polsko-Japońska Akademia Technik Komputerowych",
+            location: "Warszawa, Polska",
+            degree: "Inżynier Informatyki",
+            summary: "Obroniłem tytuł inżyniera informatyki ze specjalizacją w cyberbezpieczeństwie i zaawansowanych sieciach komputerowych, uzyskując ocenę 4,5 na koniec studiów. Ukończyłem również wiele kursów dodatkowych związanych ze sztuczną inteligencją, zaawansowaną inżynierią oprogramowania i bioinformatyką.",
+            period: "2020 - 2024",
+            icon: "/education/pjatk.png"
           }
         ]
       },
       contact: {
         title: "Kontakt",
-        description: "Jestem zawsze otwarty na nowe możliwości i współpracę. Możesz skontaktować się ze mną poprzez email lub połączyć się ze mną w mediach społecznościowych.",
+        description: "Zawsze poszukuję nowych możliwości i współpracy. Zapraszam do kontaktu przez email lub media społecznościowe.",
         email: "kontakt@adrianjobda.pl",
         phone: "+48 451 173 472",
-        address: "Warszawa, Polska"
+        contactWithMe: "Moje profile",
+        quickLinks: [
+          {
+            name: "GitHub",
+            url: "https://github.com/adrianjobda",
+            icon: "github"
+          },
+          {
+            name: "LinkedIn",
+            url: "https://linkedin.com/in/adrianjobda",
+            icon: "linkedin"
+          }
+        ]
       }
     },
-    footer: {
-      quickLinks: "Copyright © 2025 Adrian Jobda. Wszelkie prawa zastrzeżone."
-    }
+    footer: `Copyright © 2025 - ${new Date().getFullYear()} Adrian Jobda. Wszelkie prawa zastrzeżone.`
   }
 };
 function HomeContent() {
@@ -331,13 +371,10 @@ function HomeContent() {
               <a 
                 href="#about" 
                 onClick={(e) => handleNavClick(e, 'about')}
-                className="glass glass-hover px-6 py-3"
+                className="glass glass-hover px-6 py-3 bg-highlight"
               >
                 {t.sections.hero.learnMore}
               </a>
-              <button className="glass glass-hover px-6 py-3">
-                {t.sections.hero.downloadResume}
-              </button>
             </div>
           </div>
         </div>
@@ -372,6 +409,11 @@ function HomeContent() {
               <div className="glass-hover p-2">React / Next.js</div>
               <div className="glass-hover p-2">TypeScript</div>
               <div className="glass-hover p-2">Tailwind CSS</div>
+              <div className="glass-hover p-2">HTML</div>
+              <div className="glass-hover p-2">Angular</div>
+              <div className="glass-hover p-2">Flutter</div>
+              <div className="glass-hover p-2">Ionic</div>
+              <div className="glass-hover p-2">Bootstrap</div>
             </div>
           </div>
           {/* Backend */}
@@ -381,6 +423,11 @@ function HomeContent() {
               <div className="glass-hover p-2">Node.js</div>
               <div className="glass-hover p-2">Python</div>
               <div className="glass-hover p-2">PostgreSQL</div>
+              <div className="glass-hover p-2">NoSql systems</div>
+              <div className="glass-hover p-2">Django</div>
+              <div className="glass-hover p-2">Flask</div>
+              <div className="glass-hover p-2">Java</div>
+              <div className="glass-hover p-2">C/C++</div>
             </div>
           </div>
           {/* Tools */}
@@ -390,6 +437,11 @@ function HomeContent() {
               <div className="glass-hover p-2">Git</div>
               <div className="glass-hover p-2">Docker</div>
               <div className="glass-hover p-2">AWS</div>
+              <div className="glass-hover p-2">Azure</div>
+              <div className="glass-hover p-2">RESTful APIs</div>
+              <div className="glass-hover p-2">SOAP</div>
+              <div className="glass-hover p-2">CUDA</div>
+              <div className="glass-hover p-2">AI/ML</div>
             </div>
           </div>
         </div>
@@ -406,8 +458,8 @@ function HomeContent() {
           {t.sections.experience.work.map((job, index) => (
             <div key={index} className="glass p-6 transition-all hover:scale-[1.02]">
               <div className="flex flex-col md:flex-row gap-6">
-                <div className="w-16 h-16 rounded-full glass flex items-center justify-center flex-shrink-0 mx-auto md:mx-0">
-                  {job.icon}
+                <div className="w-16 h-16 rounded-full glass flex items-center justify-center flex-shrink-0 mx-auto md:mx-0 overflow-hidden">
+                  <img src={`${job.icon}`} alt={job.role} className="w-16 h-16" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">{job.role}</h3>
@@ -432,8 +484,8 @@ function HomeContent() {
           {t.sections.education.schools.map((school, index) => (
             <div key={index} className="glass p-6 transition-all hover:scale-[1.02]">
               <div className="flex flex-col md:flex-row gap-6">
-                <div className="w-16 h-16 rounded-full glass flex items-center justify-center flex-shrink-0 mx-auto md:mx-0">
-                  {school.icon}
+                <div className="w-16 h-16 rounded-full glass flex items-center justify-center flex-shrink-0 mx-auto md:mx-0 overflow-hidden">
+                  <img src={`${school.icon}`} alt={school.name} className="w-16 h-16" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">{school.name}</h3>
@@ -459,18 +511,39 @@ function HomeContent() {
           <p className="text-lg text-center mb-8">
             {t.sections.contact.description}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-hover p-4 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="p-4 text-center">
               <p className="font-semibold mb-2">Email</p>
               <p className="text-foreground/60">{t.sections.contact.email}</p>
             </div>
-            <div className="glass-hover p-4 text-center">
+            <div className="p-4 text-center">
               <p className="font-semibold mb-2">Phone</p>
               <p className="text-foreground/60">{t.sections.contact.phone}</p>
             </div>
-            <div className="glass-hover p-4 text-center">
-              <p className="font-semibold mb-2">Location</p>
-              <p className="text-foreground/60">{t.sections.contact.address}</p>
+          </div>
+          
+          {/* Quick Links */}
+          <div className="border-t border-border/20 pt-6">
+            <h3 className="text-lg font-semibold text-center mb-4">{t.sections.contact.contactWithMe}</h3>
+            <div className="flex justify-center gap-4 ">
+              {t.sections.contact.quickLinks.map((link, index) => {
+                const IconComponent = 
+                  link.icon === 'github' ? Github :
+                  link.icon === 'linkedin' ? Linkedin : ExternalLink;
+                
+                return (
+                  <a
+                    key={index}
+                    href={link.url}
+                    target={link.icon !== 'mail' ? '_blank' : undefined}
+                    rel={link.icon !== 'mail' ? 'noopener noreferrer' : undefined}
+                    className="p-3 rounded-full transition-all hover:scale-110 flex items-center justify-center smlbtn-hover"
+                    aria-label={link.name}
+                  >
+                    <IconComponent className="w-5 h-5" />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -480,7 +553,7 @@ function HomeContent() {
     {/* Footer */}
     <footer className="w-full px-6 py-8">
       <div className="max-w-6xl mx-auto text-center text-foreground/60">
-        <p>{t.footer.quickLinks}</p>
+        <p>{t.footer}</p>
       </div>
     </footer>
     </div>
