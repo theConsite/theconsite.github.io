@@ -510,14 +510,10 @@ function HomeContent() {
           <p className="text-lg text-center mb-8">
             {t.sections.contact.description}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 gap-6 mb-8">
             <div className="p-4 text-center">
               <p className="font-semibold mb-2">Email</p>
               <p className="text-foreground/60">{t.sections.contact.email}</p>
-            </div>
-            <div className="p-4 text-center">
-              <p className="font-semibold mb-2">Phone</p>
-              <p className="text-foreground/60">{t.sections.contact.phone}</p>
             </div>
           </div>
           
