@@ -339,7 +339,6 @@ function HomeContent() {
               language === option.code ? 'bg-foreground/5' : ''
             }`}
           >
-            <span className="text-sm">{option.flag}</span>
             <span className="text-sm">{option.label}</span>
           </button>
         ))}
